@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import bulbs
+import importlib
+
 from flask import current_app
 
 # Find the stack on which we want to store the database connection.
@@ -41,17 +43,17 @@ class Bulbs(object):
         assert current_app.config['BULBS_DATABASE'] in self.db_types, "Valid values for 'BULBS_DATABASE' are: %r" % self.db_types
         assert current_app.config['BULBS_LOG_LEVEL'] in self.log_levels, "Valid values for 'BULBS_LOG_LEVEL' are: %r" % self.log_levels
 
-        db = bulbs[current_app.config['BULBS_DATABASE']]
-        from db import Config, Graph
+        db = importlib.import_module('.%s' % current_app.config['BULBS_DATABASE'], 'bulbs')
+        log_level = getattr(bulbs.config, current_app.config['BULBS_LOG_LEVEL'])
 
-        config = Config(
+        config = db.Config(
             current_app.config['BULBS_URI'],
             username=current_app.config['BULBS_USER'],
             password=current_app.config['BULBS_PASSWORD'],
         )
-        config.set_logger(bulbs.config[current_app.config['BULBS_LOG_LEVEL']])
+        config.set_logger(log_level)
 
-        return Graph(config)
+        return db.Graph(config)
 
     def teardown(self, exception):
         ctx = stack.top
