@@ -25,7 +25,7 @@ class Bulbs(object):
 
     def init_app(self, app):
         app.config.setdefault('BULBS_DATABASE', 'neo4jserver')
-        app.config.setdefault('BULBS_URI', bulbs.neo4jserver.NEO4J_URI)
+        app.config.setdefault('BULBS_URI', 'http://localhost:7474/db/data/')
         app.config.setdefault('BULBS_USER', '')
         app.config.setdefault('BULBS_PASSWORD', '')
         app.config.setdefault('BULBS_LOG_LEVEL', 'INFO')
