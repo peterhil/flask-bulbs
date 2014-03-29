@@ -38,8 +38,8 @@ class Bulbs(object):
 
     def get_graph(self):
         """Get bulbs Graph based an app settings."""
-        assert current_app.config['BULBS_DATABASE'] in db_types, "Valid values for 'BULBS_DATABASE' are: %r" % db_types
-        assert current_app.config['BULBS_LOG_LEVEL'] in log_levels, "Valid values for 'BULBS_LOG_LEVEL' are: %r" % log_levels
+        assert current_app.config['BULBS_DATABASE'] in self.db_types, "Valid values for 'BULBS_DATABASE' are: %r" % self.db_types
+        assert current_app.config['BULBS_LOG_LEVEL'] in self.log_levels, "Valid values for 'BULBS_LOG_LEVEL' are: %r" % self.log_levels
 
         db = bulbs[current_app.config['BULBS_DATABASE']]
         from db import Config, Graph
