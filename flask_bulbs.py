@@ -24,10 +24,10 @@ class Bulbs(object):
             self.init_app(app)
 
     def init_app(self, app):
-        app.config.setdefault('BULBS_DATABASE', 'neo4jserver')
-        app.config.setdefault('BULBS_URI', 'http://localhost:7474/db/data/')
-        app.config.setdefault('BULBS_USER', '')
-        app.config.setdefault('BULBS_PASSWORD', '')
+        app.config.setdefault('BULBS_DATABASE', 'rexster')
+        app.config.setdefault('BULBS_URI', 'http://localhost:8182/graphs/emptygraph')
+        app.config.setdefault('BULBS_USER', None)
+        app.config.setdefault('BULBS_PASSWORD', None)
         app.config.setdefault('BULBS_LOG_LEVEL', 'INFO')
         # Use the newstyle teardown_appcontext if it's available,
         # otherwise fall back to the request context
