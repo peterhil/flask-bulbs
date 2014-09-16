@@ -25,6 +25,7 @@ class Bulbs(object):
         config.setdefault('BULBS_USER', None)
         config.setdefault('BULBS_PASSWORD', None)
         config.setdefault('BULBS_LOG_LEVEL', 'INFO')
+        config.setdefault('BULBS_CONFIG', {})
 
         app.extensions.setdefault('bulbs', {})
         app.extensions['bulbs'][self] = self._get_graph(config)
@@ -42,9 +43,12 @@ class Bulbs(object):
         bulbs_config = db.Config(
             config['BULBS_URI'],
             username=config['BULBS_USER'],
-            password=config['BULBS_PASSWORD'],
+            password=config['BULBS_PASSWORD']
         )
         bulbs_config.set_logger(log_level)
+
+        for key, value in config['BULBS_CONFIG'].iteritems():
+            setattr(bulbs_config, key, value)
 
         return db.Graph(bulbs_config)
 
