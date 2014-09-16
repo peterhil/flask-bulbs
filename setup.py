@@ -12,7 +12,7 @@ from setuptools import setup
 
 setup(
     name='Flask-Bulbs',
-    version='0.1',
+    version='0.2',
     url='http://github.com/peterhil/flask-bulbs/',
     license='MIT',
     author='Peter Hillerström',
